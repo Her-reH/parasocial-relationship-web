@@ -1,10 +1,7 @@
-
-// DOM Elements
 const navbar = document.querySelector('.navbar');
 const navLinks = document.querySelectorAll('.nav-link');
 const sections = document.querySelectorAll('.section');
 
-// Utility: Throttle function for 60fps performance
 function throttle(func, limit) {
     let inThrottle;
     return function () {
@@ -18,9 +15,6 @@ function throttle(func, limit) {
     };
 }
 
-// ============================================
-// 1. SMOOTH SCROLLING & ACTIVE NAV
-// ============================================
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -37,24 +31,18 @@ navLinks.forEach(link => {
     });
 });
 
-// ============================================
-// 2. NAVBAR SCROLL EFFECTS (60fps throttled)
-// ============================================
 const handleScroll = throttle(() => {
-    // Navbar shrink effect
     if (window.scrollY > 100) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
     }
 
-    // Active nav link on scroll
     updateActiveNavLinkOnScroll();
 }, 16);
 
 window.addEventListener('scroll', handleScroll);
 
-// Update active nav functions
 function updateActiveNavLink(activeLink) {
     navLinks.forEach(link => link.classList.remove('active'));
     activeLink.classList.add('active');
@@ -77,9 +65,6 @@ function updateActiveNavLinkOnScroll() {
     });
 }
 
-// ============================================
-// 3. MOBILE MENU (HAMBURGER)
-// ============================================
 function initMobileMenu() {
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navMenu = document.querySelector('.nav-menu');
@@ -90,28 +75,31 @@ function initMobileMenu() {
             navMenu.classList.toggle('active');
             document.body.classList.toggle('menu-open');
         });
-
-        // Close menu when clicking link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                document.body.classList.remove('menu-open');
+                closeMenu(navMenu);
             });
         });
 
-        // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!e.target.closest('.navbar')) {
-                navMenu.classList.remove('active');
-                document.body.classList.remove('menu-open');
+                closeMenu(navMenu);
             }
         });
     }
 }
 
-// ============================================
-// 4. INTERSECTION OBSERVER ANIMATIONS
-// ============================================
+function closeMenu(navMenu) {
+    if (navMenu && navMenu.classList.contains('active')) {
+        navMenu.classList.add('closing');
+
+        setTimeout(() => {
+            navMenu.classList.remove('active', 'closing');
+            document.body.classList.remove('menu-open');
+        }, 300)
+    }
+}
+
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -126,9 +114,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// ============================================
-// 5. SCROLL TO TOP BUTTON
-// ============================================
 function createScrollToTop() {
     const scrollBtn = document.querySelector('.scroll-to-top');
 
@@ -146,9 +131,6 @@ function createScrollToTop() {
     });
 }
 
-// ============================================
-// 6. PARALLAX HERO EFFECT
-// ============================================
 const handleParallax = throttle(() => {
     const scrolled = window.scrollY;
     const parallaxSpeed = 0.5;
@@ -166,11 +148,8 @@ const handleParallax = throttle(() => {
 
 window.addEventListener('scroll', handleParallax);
 
-// ============================================
-// 7. LOADING & PERFORMANCE
-// ============================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize animations
     document.querySelectorAll('.feature-card, .impact-card').forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
@@ -188,10 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 100);
 });
 
-// ============================================
-// 8. MOBILE OPTIMIZATIONS
-// ============================================
-// Prevent iOS zoom on double-tap
 let lastTouchEnd = 0;
 document.addEventListener('touchend', (e) => {
     const now = new Date().getTime();
@@ -201,9 +176,6 @@ document.addEventListener('touchend', (e) => {
     lastTouchEnd = now;
 }, false);
 
-// ============================================
-// 9. WINDOW RESIZE HANDLER
-// ============================================
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
@@ -216,9 +188,7 @@ window.addEventListener('resize', () => {
     }, 250);
 });
 
-// ============================================
-// 10. PERFORMANCE MONITORING (DEV ONLY)
-// ============================================
+
 if ('performance' in window && location.hostname === 'localhost') {
     window.addEventListener('load', () => {
         const perfData = performance.getEntriesByType('navigation')[0];
@@ -229,3 +199,4 @@ if ('performance' in window && location.hostname === 'localhost') {
         });
     });
 }
+

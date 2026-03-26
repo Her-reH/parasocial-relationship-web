@@ -15,6 +15,8 @@
     --white: #ffffff;
     --shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    --gradient-positive: linear-gradient(135deg, #00d4ff 0%, #00aaff 100%);
+    --gradient-negative: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     /* NEW BACKGROUND COLORS */
@@ -22,6 +24,13 @@
     --bg-secondary: #1a1a3e;
     --bg-accent: #2a1a4e;
     --glass: rgba(255, 255, 255, 0.05);
+}
+
+.fa-seedling {
+    background: var(--gradient-positive) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
 }
 
 html {
@@ -100,16 +109,8 @@ body::after {
     }
 }
 
-.navbar .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 3rem;
-}
-
+/* CONTAINER */
+.navbar .container,
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -238,7 +239,7 @@ body.menu-open {
     overflow: hidden;
 }
 
-/* HERO SECTION - TAMBAH SPASI DARI NAVBAR */
+/* HERO SECTION */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -252,7 +253,6 @@ body.menu-open {
     position: relative;
     overflow: hidden;
     padding-top: 120px;
-    /* SPASI DARI NAVBAR */
     padding-bottom: 80px;
 }
 
@@ -417,58 +417,109 @@ body.menu-open {
     color: var(--secondary);
 }
 
-.cta-button:hover::after {
-    width: 100%;
-}
-
 .hero-visual {
     position: relative;
-    height: 400px;
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
     animation: slideInRight 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
 }
 
-.hero-visual::before {
-    content: '';
-    position: absolute;
-    width: 350px;
-    height: 350px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
-    backdrop-filter: blur(20px);
-    animation: pulseRing 3s ease-in-out infinite;
-    z-index: 1;
-}
-
-.hero-visual::after {
-    content: '';
-    position: absolute;
+.social-icons-animation {
+    position: relative;
     width: 500px;
     height: 500px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.social-icon {
+    position: absolute;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: rotateSlow 20s linear infinite;
-    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: white;
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.6),
+        0 0 60px rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(40px);
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.tiktok-hero {
-    font-size: clamp(10rem, 25vw, 18rem);
-    background: linear-gradient(135deg, #ff0050, #00d4ff, #ff0050);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 40px rgba(255, 0, 80, 0.4));
-    z-index: 2;
-    position: relative;
-    animation: bounceFloat 4s ease-in-out infinite;
+.social-icon:hover {
+    transform: scale(1.5) !important;
+    z-index: 10;
+    box-shadow:
+        0 50px 120px rgba(0, 0, 0, 0.8),
+        0 0 100px rgba(255, 255, 255, 1);
+    animation-play-state: paused;
 }
 
-/* ANIMATIONS */
+.social-icon.x {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(40px);
+    border: 4px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.7),
+        inset 0 2px 15px rgba(255, 255, 255, 0.2);
+    top: 5%;
+    left: 42%;
+    animation: bounceGlow 6s ease-in-out infinite 0.5s;
+}
+
+.social-icon.instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    top: 42%;
+    left: 5%;
+    animation: bounceGlow 6s ease-in-out infinite 1.5s;
+}
+
+.social-icon.facebook {
+    background: linear-gradient(135deg, #1877f2 0%, #4267B2 100%);
+    top: 42%;
+    right: 5%;
+    animation: bounceGlow 6s ease-in-out infinite reverse 2.5s;
+}
+
+.social-icon.tiktok {
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(40px);
+    border: 4px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.7),
+        inset 0 2px 15px rgba(255, 255, 255, 0.2);
+    bottom: 5%;
+    left: 42%;
+    animation: bounceGlow 6s ease-in-out infinite reverse 3.5s;
+}
+
+@keyframes bounceGlow {
+
+    0%,
+    100% {
+        transform: translateY(0) scale(1) rotate(0deg);
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.25);
+    }
+
+    25% {
+        transform: translateY(-25px) scale(1.12) rotate(6deg);
+        box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5), 0 0 50px rgba(255, 255, 255, 0.5);
+    }
+
+    50% {
+        transform: translateY(-12px) scale(1.06) rotate(-4deg);
+    }
+
+    75% {
+        transform: translateY(-35px) scale(1.18) rotate(10deg);
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.6), 0 0 80px rgba(255, 255, 255, 0.7);
+    }
+}
+
 @keyframes slideInLeft {
     from {
         opacity: 0;
@@ -492,7 +543,7 @@ body.menu-open {
     }
 
     50% {
-        transform: scale(1.1);
+        transform: scale(1.15);
         opacity: 0.5;
     }
 }
@@ -504,22 +555,6 @@ body.menu-open {
 
     to {
         transform: translate(-50%, -50%) rotate(360deg);
-    }
-}
-
-@keyframes bounceFloat {
-
-    0%,
-    100% {
-        transform: translateY(0px) scale(1);
-    }
-
-    33% {
-        transform: translateY(-20px) scale(1.02);
-    }
-
-    66% {
-        transform: translateY(-10px) scale(0.98);
     }
 }
 
@@ -543,7 +578,8 @@ body.menu-open {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: linear-gradient(45deg, transparent 49%, rgba(255, 0, 80, 0.02) 50%, transparent 51%),
+    background-image:
+        linear-gradient(45deg, transparent 49%, rgba(255, 0, 80, 0.02) 50%, transparent 51%),
         linear-gradient(-45deg, transparent 49%, rgba(0, 212, 255, 0.02) 50%, transparent 51%);
     background-size: 20px 20px;
     animation: gridMove 30s linear infinite;
@@ -564,7 +600,6 @@ body.menu-open {
     margin-bottom: 4rem;
 }
 
-/* H2 DIUBAH - HAPUS KOTAK PUTIH DAN GARIS BAWAH */
 .section-header h2 {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 800;
@@ -585,7 +620,7 @@ body.menu-open {
     margin: 0 auto;
 }
 
-/* 3-COLUMN GRID */
+/* 3-COLUMN GRID (DEFINISI) */
 .features-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -594,7 +629,7 @@ body.menu-open {
     margin: 0 auto;
 }
 
-/* FEATURE GRID 2x2 */
+/* UNIFIED FEATURE GRID SYSTEM */
 .features-grid {
     display: flex;
     flex-direction: column;
@@ -609,6 +644,7 @@ body.menu-open {
     gap: 2rem;
 }
 
+/* BASE FEATURE CARD */
 .feature-card {
     background: rgba(255, 255, 255, 0.08);
     padding: 2.5rem 2rem;
@@ -625,8 +661,6 @@ body.menu-open {
 .feature-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
     top: 0;
     left: 0;
     right: 0;
@@ -674,87 +708,50 @@ body.menu-open {
     line-height: 1.6;
 }
 
-/* IMPACT GRID */
-.impact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.impact-card {
-    padding: 3rem 2.5rem;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.impact-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    transform: scaleX(0);
-    transition: var(--transition);
-}
-
-.impact-card:hover::before {
-    transform: scaleX(1);
-}
-
-.impact-card.positive {
-    background: rgba(0, 212, 255, 0.15);
+/* POSITIVE IMPACT CARDS (Dampak Positif) */
+.feature-card.positive {
+    background: rgba(0, 212, 255, 0.12);
     border: 1px solid rgba(0, 212, 255, 0.3);
 }
 
-.impact-card.positive::before {
-    background: linear-gradient(90deg, #00d4ff, #00aaff);
+.feature-card.positive::before {
+    background: var(--gradient-positive);
 }
 
-.impact-card.negative {
-    background: rgba(255, 0, 80, 0.15);
+.feature-card.positive i {
+    background: var(--gradient-positive);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.feature-card.positive:hover {
+    border-color: rgba(0, 212, 255, 0.6);
+    background: rgba(0, 212, 255, 0.25);
+    box-shadow: 0 30px 60px rgba(0, 212, 255, 0.3);
+}
+
+/* NEGATIVE IMPACT CARDS (Dampak Negatif) */
+.feature-card.negative {
+    background: rgba(255, 0, 80, 0.12);
     border: 1px solid rgba(255, 0, 80, 0.3);
 }
 
-.impact-card.negative::before {
-    background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+.feature-card.negative::before {
+    background: var(--gradient-negative);
 }
 
-.impact-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: var(--light);
+.feature-card.negative i {
+    background: var(--gradient-negative);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-.impact-card p {
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.1rem;
-}
-
-.impact-card:hover {
-    transform: translateY(-15px) scale(1.03);
-    border-color: rgba(255, 0, 80, 0.4);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-}
-
-.impact-card i {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    transition: var(--transition);
-}
-
-.impact-card:hover i {
-    transform: scale(1.2) rotate(360deg);
+.feature-card.negative:hover {
+    border-color: rgba(255, 0, 80, 0.6);
+    background: rgba(255, 0, 80, 0.25);
+    box-shadow: 0 30px 60px rgba(255, 0, 80, 0.3);
 }
 
 /* SCROLL TO TOP */
@@ -788,7 +785,6 @@ body.menu-open {
     visibility: visible;
 }
 
-/* RESPONSIVE */
 @media (max-width: 1024px) {
     .features-grid-3 {
         grid-template-columns: repeat(2, 1fr);
@@ -798,11 +794,37 @@ body.menu-open {
     .hero-content {
         gap: 3rem;
     }
+
+    .social-icons-animation {
+        width: 420px;
+        height: 420px;
+    }
+
+    .social-icon {
+        width: 105px;
+        height: 105px;
+        font-size: 42px;
+    }
 }
 
 @media (max-width: 768px) {
+
     .navbar {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
         padding: 1rem 20px;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(30px);
+    }
+
+    .navbar .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
     }
 
     .nav-menu {
@@ -811,6 +833,55 @@ body.menu-open {
 
     .mobile-toggle {
         display: block;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--light);
+        padding: 0.5rem;
+        border-radius: 8px;
+        backdrop-filter: blur(10px);
+        transition: var(--transition);
+        flex-shrink: 0;
+    }
+
+    .mobile-toggle:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.6);
+        transform: scale(1.1);
+    }
+
+    .nav-brand {
+        margin: 0 !important;
+        font-size: 1.3rem;
+        flex-shrink: 0;
+    }
+
+    .nav-menu.active {
+        display: flex !important;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(25px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 1.5rem 20px;
+        gap: 1.2rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        max-height: 400px;
+        overflow: hidden;
+    }
+
+    .nav-menu.closing {
+        animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+    }
+
+    .hero {
+        padding-top: 120px !important;
+        padding-bottom: 60px;
     }
 
     .hero-content {
@@ -821,12 +892,7 @@ body.menu-open {
 
     .hero-visual {
         order: -1;
-        height: 300px;
-    }
-
-    .hero {
-        padding-top: 100px;
-        padding-bottom: 60px;
+        height: 420px;
     }
 
     .feature-row {
@@ -842,19 +908,100 @@ body.menu-open {
         grid-template-columns: 1fr;
     }
 
-    .impact-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
     .section {
         padding: 60px 0;
+    }
+
+    .social-icons-animation {
+        width: 360px;
+        height: 360px;
+    }
+
+    .social-icon {
+        width: 92px;
+        height: 92px;
+        font-size: 36px;
+    }
+
+    .social-icon.x {
+        top: 8%;
+        left: 42%;
+    }
+
+    .social-icon.instagram {
+        top: 42%;
+        left: 8%;
+    }
+
+    .social-icon.facebook {
+        top: 42%;
+        right: 8%;
+    }
+
+    .social-icon.tiktok {
+        bottom: 8%;
+        left: 42%;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
+/* ANIMASI MENU */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+        max-height: 0;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 400px;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 400px;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+        max-height: 0;
     }
 }
 
 @media (max-width: 480px) {
     .container {
         padding: 0 15px;
+    }
+
+    .navbar {
+        padding: 0.9rem 15px;
+    }
+
+    .nav-brand {
+        font-size: 1.2rem;
+    }
+
+    .mobile-toggle {
+        padding: 0.45rem;
+        font-size: 1.4rem;
+    }
+
+    .nav-menu.active {
+        padding: 1.2rem 15px;
+        gap: 1rem;
+    }
+
+    .hero {
+        padding-top: 110px !important;
     }
 
     .hero-content {
@@ -866,8 +1013,7 @@ body.menu-open {
         font-size: 1.2rem;
     }
 
-    .feature-card,
-    .impact-card {
+    .feature-card {
         padding: 2rem 1.5rem;
     }
 
@@ -876,6 +1022,100 @@ body.menu-open {
         right: 20px;
         width: 45px;
         height: 45px;
+    }
+
+    .hero-visual {
+        height: 380px;
+    }
+
+    .social-icons-animation {
+        width: 300px;
+        height: 300px;
+    }
+
+    .social-icon {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+        border: 3px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .social-icon:hover {
+        transform: scale(1.35) !important;
+    }
+
+    .social-icon.x {
+        top: 10%;
+        left: 40%;
+    }
+
+    .social-icon.instagram {
+        top: 40%;
+        left: 10%;
+    }
+
+    .social-icon.facebook {
+        top: 40%;
+        right: 10%;
+    }
+
+    .social-icon.tiktok {
+        bottom: 10%;
+        left: 40%;
+    }
+}
+
+@media (max-width: 360px) {
+    .navbar {
+        padding: 0.8rem 12px;
+    }
+
+    .nav-brand {
+        font-size: 1.1rem;
+    }
+
+    .mobile-toggle {
+        padding: 0.4rem;
+        font-size: 1.3rem;
+    }
+
+    .hero {
+        padding-top: 105px !important;
+    }
+
+    .hero-visual {
+        height: 350px;
+    }
+
+    .social-icons-animation {
+        width: 260px;
+        height: 260px;
+    }
+
+    .social-icon {
+        width: 72px;
+        height: 72px;
+        font-size: 28px;
+    }
+
+    .social-icon.x {
+        top: 12%;
+        left: 38%;
+    }
+
+    .social-icon.instagram {
+        top: 38%;
+        left: 12%;
+    }
+
+    .social-icon.facebook {
+        top: 38%;
+        right: 12%;
+    }
+
+    .social-icon.tiktok {
+        bottom: 12%;
+        left: 38%;
     }
 }
 
