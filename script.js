@@ -200,3 +200,12 @@ if ('performance' in window && location.hostname === 'localhost') {
     });
 }
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XYSVG4CLYV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-XYSVG4CLYV');
+</script>
